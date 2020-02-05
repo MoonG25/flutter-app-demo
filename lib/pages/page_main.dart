@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bone_app/components/neon_text.dart';
 import 'package:bone_app/models/event_poster.dart';
 import 'package:bone_app/ui/sliver_appbar_delegate.dart';
@@ -17,6 +19,31 @@ class _MainPageState extends State<MainPage> {
     new EventPoster('EVENT 4', '2020-01-04', 'assets/images/ad_4.jpg'),
     new EventPoster('EVENT 5', '2020-01-05', 'assets/images/ad_5.jpg'),
   ];
+
+  var _colors = [Colors.deepPurpleAccent, Colors.cyan];
+  var _begin = Alignment.centerRight;
+  var _end = new Alignment(-1.0, -1.0);
+  bool _isTrue = true;
+
+  _MainPageState() {
+    Timer.periodic(new Duration(seconds: 3), (timer) {
+      if (_isTrue) {
+        setState(() {
+          _colors = [Colors.cyan, Colors.deepPurpleAccent];
+          _begin = Alignment.centerLeft;
+          _end = new Alignment(1.0, 1.0);
+          _isTrue = false;
+        });
+      } else {
+        setState(() {
+          _colors = [Colors.deepPurpleAccent, Colors.cyan];
+          _begin = Alignment.centerRight;
+          _end = new Alignment(-1.0, -1.0);
+          _isTrue = true;
+        });
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -208,189 +235,15 @@ class _MainPageState extends State<MainPage> {
                       margin: EdgeInsets.all(30.0),
                       child: Stack(
                         children: <Widget>[
-                          Container(
+                          AnimatedContainer(
+                            duration: Duration(seconds: 3),
                             height: 75.0,
                             width: 75.0,
                             decoration: BoxDecoration(
                               gradient: new LinearGradient(
-                                  colors: [Colors.deepPurpleAccent, Colors.cyan],
-                                  begin: Alignment.centerRight,
-                                  end: new Alignment(-1.0, -1.0)
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(left: 15.0, top: 15.0),
-                            child: Text(
-                              'Crew',
-                              style: TextStyle(
-                                fontSize: 72,
-                                fontFamily: 'BebasNeue',
-                                fontWeight: FontWeight.w700,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    AspectRatio(
-                      aspectRatio: 280 / 120,
-                      child: Container(
-                        padding: const EdgeInsets.only(top: 15.0),
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage(
-                              'assets/images/artist_1.webp',
-                            ),
-                            fit: BoxFit.fitWidth,
-                            alignment: FractionalOffset(0.0, 0.1),
-                          ),
-                          borderRadius: BorderRadius.vertical(
-                              top: Radius.circular(5.0)
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black,
-                              blurRadius: 30.0, //s the effect of softening the shadow
-                              spreadRadius: 5.0, // has the effect of extending the shadow
-                              offset: Offset(
-                                10.0, // horizontal, move right 10
-                                10.0, // vertical, move down 10
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    AspectRatio(
-                      aspectRatio: 280 / 120,
-                      child: Container(
-                        padding: const EdgeInsets.only(top: 15.0),
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage(
-                              'assets/images/artist_2.webp',
-                            ),
-                            fit: BoxFit.fitWidth,
-                            alignment: FractionalOffset(0.0, 0.3),
-                          ),
-                          borderRadius: BorderRadius.vertical(
-                              top: Radius.circular(5.0)
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black,
-                              blurRadius: 30.0, /// has the effect of softening the shadow
-                              spreadRadius: 5.0, // has the effect of extending the shadow
-                              offset: Offset(
-                                10.0, // horizontal, move right 10
-                                10.0, // vertical, move down 10
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    AspectRatio(
-                      aspectRatio: 280 / 120,
-                      child: Container(
-                        padding: const EdgeInsets.only(top: 15.0),
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage(
-                              'assets/images/artist_3.webp',
-                            ),
-                            fit: BoxFit.cover,
-                            alignment: FractionalOffset(0.0, 0.15),
-                          ),
-                          borderRadius: BorderRadius.vertical(
-                              top: Radius.circular(5.0)
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black,
-                              blurRadius: 30.0, // has the effect of softening the shadow
-                              spreadRadius: 5.0, // has the effect of extending the shadow
-                              offset: Offset(
-                                10.0, // horizontal, move right 10
-                                10.0, // vertical, move down 10
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    AspectRatio(
-                      aspectRatio: 280 / 120,
-                      child: Container(
-                        padding: const EdgeInsets.only(top: 15.0),
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage(
-                              'assets/images/artist_4.webp',
-                            ),
-                            fit: BoxFit.cover,
-                            alignment: FractionalOffset(0.0, 0.3),
-                          ),
-                          borderRadius: BorderRadius.vertical(
-                              top: Radius.circular(5.0)
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black,
-                              blurRadius: 30.0, //as the effect of softening the shadow
-                              spreadRadius: 5.0, // has the effect of extending the shadow
-                              offset: Offset(
-                                10.0, // horizontal, move right 10
-                                10.0, // vertical, move down 10
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    AspectRatio(
-                      aspectRatio: 280 / 120,
-                      child: Container(
-                        padding: const EdgeInsets.only(top: 15.0),
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage(
-                              'assets/images/artist_5.webp',
-                            ),
-                            fit: BoxFit.fitWidth,
-                            alignment: FractionalOffset(0.0, 0.20),
-                          ),
-                          borderRadius: BorderRadius.vertical(
-                              top: Radius.circular(5.0)
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black,
-                              blurRadius: 30.0, // has the effect of softening the shadow
-                              spreadRadius: 5.0, // has the effect of extending the shadow
-                              offset: Offset(
-                                10.0, // horizontal, move right 10
-                                10.0, // vertical, move down 10
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.all(30.0),
-                      child: Stack(
-                        children: <Widget>[
-                          Container(
-                            height: 75.0,
-                            width: 75.0,
-                            decoration: BoxDecoration(
-                              gradient: new LinearGradient(
-                                  colors: [Colors.deepPurpleAccent, Colors.cyan],
-                                  begin: Alignment.centerRight,
-                                  end: new Alignment(-1.0, -1.0)
+                                colors: _colors,
+                                begin: _begin,
+                                end: _end
                               ),
                             ),
                           ),
@@ -412,32 +265,50 @@ class _MainPageState extends State<MainPage> {
                     Row(
                       children: <Widget>[
                         Expanded(
-                          child: Image.asset(
-                            'assets/images/artist_1.webp',
+                          child: GestureDetector(
+                            child: Image.asset(
+                              'assets/images/artist_1.webp',
+                            ),
+                            onTap: () => print('artist 1'),
                           ),
                         ),
                         Expanded(
-                          child: Image.asset(
-                            'assets/images/artist_2.webp',
+                          child: GestureDetector(
+                            child: Image.asset(
+                              'assets/images/artist_2.webp',
+                            ),
+                            onTap: () => print('artist 2'),
                           ),
                         ),
                         Expanded(
-                          child: Image.asset(
-                            'assets/images/artist_3.webp',
+                          child: GestureDetector(
+                            child: Image.asset(
+                              'assets/images/artist_3.webp',
+                            ),
+                            onTap: () => print('artist 3'),
                           ),
                         ),
                         Expanded(
-                          child: Image.asset(
-                            'assets/images/artist_4.webp',
+                          child: GestureDetector(
+                            child: Image.asset(
+                              'assets/images/artist_4.webp',
+                            ),
+                            onTap: () => print('artist 4'),
                           ),
                         ),
                         Expanded(
-                          child: Image.asset(
-                            'assets/images/artist_5.webp',
+                          child: GestureDetector(
+                            child: Image.asset(
+                              'assets/images/artist_5.webp',
+                            ),
+                            onTap: () => print('artist 5'),
                           ),
                         ),
                       ],
                     ),
+                    Container(
+                      margin: EdgeInsets.all(30.0),
+                    )
                   ],
                 ),
               ),
