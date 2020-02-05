@@ -112,8 +112,8 @@ class _MainPageState extends State<MainPage> {
                         ],
                       ),
                     ),
-                    Padding(
-                      padding: EdgeInsets.only(left: 30.0, right: 30.0),
+                    Container(
+                      margin: EdgeInsets.all(30.0),
                       child: Stack(
                         children: <Widget>[
                           Align(
@@ -204,8 +204,8 @@ class _MainPageState extends State<MainPage> {
                         ],
                       ),
                     ),
-                    Padding(
-                      padding: EdgeInsets.only(left: 30.0, right: 30.0, bottom: 30.0),
+                    Container(
+                      margin: EdgeInsets.all(30.0),
                       child: Stack(
                         children: <Widget>[
                           Container(
@@ -247,7 +247,7 @@ class _MainPageState extends State<MainPage> {
                             alignment: FractionalOffset(0.0, 0.1),
                           ),
                           borderRadius: BorderRadius.vertical(
-                            top: Radius.circular(5.0)
+                              top: Radius.circular(5.0)
                           ),
                           boxShadow: [
                             BoxShadow(
@@ -378,6 +378,65 @@ class _MainPageState extends State<MainPage> {
                           ],
                         ),
                       ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.all(30.0),
+                      child: Stack(
+                        children: <Widget>[
+                          Container(
+                            height: 75.0,
+                            width: 75.0,
+                            decoration: BoxDecoration(
+                              gradient: new LinearGradient(
+                                  colors: [Colors.deepPurpleAccent, Colors.cyan],
+                                  begin: Alignment.centerRight,
+                                  end: new Alignment(-1.0, -1.0)
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(left: 15.0, top: 15.0),
+                            child: Text(
+                              'Crew',
+                              style: TextStyle(
+                                fontSize: 72,
+                                fontFamily: 'BebasNeue',
+                                fontWeight: FontWeight.w700,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: Image.asset(
+                            'assets/images/artist_1.webp',
+                          ),
+                        ),
+                        Expanded(
+                          child: Image.asset(
+                            'assets/images/artist_2.webp',
+                          ),
+                        ),
+                        Expanded(
+                          child: Image.asset(
+                            'assets/images/artist_3.webp',
+                          ),
+                        ),
+                        Expanded(
+                          child: Image.asset(
+                            'assets/images/artist_4.webp',
+                          ),
+                        ),
+                        Expanded(
+                          child: Image.asset(
+                            'assets/images/artist_5.webp',
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
