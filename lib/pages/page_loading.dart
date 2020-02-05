@@ -28,7 +28,7 @@ class _LoadingPageState extends State<LoadingPage> {
           image: DecorationImage(
             fit: BoxFit.fill,
             image: AssetImage(
-              'assets/images/club_image_5.jpg',
+              'assets/images/club_5.jpg',
             ),
           ),
         ),

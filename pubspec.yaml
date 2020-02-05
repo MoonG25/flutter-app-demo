@@ -48,12 +48,19 @@ flutter:
     - assets/images/ad_4.jpg
     - assets/images/ad_5.jpg
     - assets/images/b1_icon.jpg
-    - assets/images/dj_image_1.jpg
-    - assets/images/club_image_1.jpg
-    - assets/images/club_image_2.jpg
-    - assets/images/club_image_3.jpg
-    - assets/images/club_image_4.jpg
-    - assets/images/club_image_5.jpg
+    - assets/images/dj_1.jpg
+    - assets/images/club_1.jpg
+    - assets/images/club_2.jpg
+    - assets/images/club_3.jpg
+    - assets/images/club_4.jpg
+    - assets/images/club_5.jpg
+    - assets/images/sliver_background.jpg
+    - assets/images/artist_1.webp
+    - assets/images/artist_2.webp
+    - assets/images/artist_3.webp
+    - assets/images/artist_4.webp
+    - assets/images/artist_5.webp
+    - assets/images/time_1.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

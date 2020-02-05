@@ -13,7 +13,7 @@ class SigninPage extends StatelessWidget {
       decoration: BoxDecoration(
         image: DecorationImage(
           fit: BoxFit.fill,
-          image: AssetImage('assets/images/club_image_5.jpg'),
+          image: AssetImage('assets/images/club_5.jpg'),
 //          colorFilter: ColorFilter.srgbToLinearGamma(),
           colorFilter: ColorFilter.mode(Color.fromARGB(155, 0, 0, 0), BlendMode.darken),
         ),
