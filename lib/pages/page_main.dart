@@ -1,10 +1,15 @@
 import 'dart:async';
 
 import 'package:bone_app/components/gradient_flow_box.dart';
+import 'package:bone_app/components/main/main_about.dart';
+import 'package:bone_app/components/main/main_artist.dart';
+import 'package:bone_app/components/main/main_info.dart';
+import 'package:bone_app/components/main/main_ticket.dart';
 import 'package:bone_app/components/neon_text.dart';
 import 'package:bone_app/models/event_poster.dart';
 import 'package:bone_app/ui/sliver_appbar_delegate.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -106,41 +111,10 @@ class _MainPageState extends State<MainPage> {
               SingleChildScrollView(
                 child: Column(
                   children: <Widget>[
-                    Padding(
-                      padding: EdgeInsets.all(30.0),
-                      child: Row(
-                        children: <Widget>[
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: <Widget>[
-                              Text(
-                                'ABOUT\nCLUB B.ONE\n',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: 'BebasNeue',
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 24,
-                                ),
-                              ),
-                              Text(
-                                'First ever Chinese VIP Night Club On Manila!\nCome and party with us. See you there!',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 8,
-                                ),
-                              )
-                            ],
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(left: 20.0),
-                            child: Image.asset(
-                              'assets/images/club_1.jpg',
-                              height: 125.0,
-                            ),
-                          )
-                        ],
-                      ),
+                    MainAbout(
+                      'CLUB B.ONE',
+                      'First ever Chinese VIP Night Club On Manila!\nCome and party with us. See you there!',
+                      'assets/images/club_1.jpg',
                     ),
                     Container(
                       margin: EdgeInsets.all(30.0),
@@ -175,64 +149,11 @@ class _MainPageState extends State<MainPage> {
                         ],
                       ),
                     ),
-                    Padding(
-                      padding: EdgeInsets.all(30.0),
-                      child: Stack(
-                        children: <Widget>[
-                          Align(
-                            alignment: Alignment(0.5, 0),
-                            child: Container(
-                              margin: EdgeInsets.only(left: 20.0),
-                              child: Image.asset(
-                                'assets/images/club_3.jpg',
-                                height: 180.0,
-                              ),
-                            ),
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: <Widget>[
-                              Text(
-                                'Doors open\nevery Thurssday, Friday, Saturday\nand Sunday',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 12,
-                                ),
-                              ),
-                              Text(
-                                '23:00',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: 'BebasNeue',
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 24,
-                                ),
-                              ),
-                              Container(
-                                margin: EdgeInsets.all(15.0),
-                                child: Container(),
-                              ),
-                              Text(
-                                'Doors closed',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 12,
-                                ),
-                              ),
-                              Text(
-                                '07:00',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: 'BebasNeue',
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 24,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
+                    MainInfo(
+                      ['Thurssday', 'Friday', 'Saturday', 'Sunday'],
+                      '23:00',
+                      '07:00',
+                      'assets/images/club_3.jpg',
                     ),
                     Container(
                       margin: EdgeInsets.all(30.0),
@@ -272,53 +193,7 @@ class _MainPageState extends State<MainPage> {
                         ],
                       ),
                     ),
-                    Container(
-                      margin: EdgeInsets.all(30.0),
-                      child: Row(
-                        children: <Widget>[
-                          Expanded(
-                            child: GestureDetector(
-                              child: Image.asset(
-                                'assets/images/artist_1.webp',
-                              ),
-                              onTap: () => print('artist 1'),
-                            ),
-                          ),
-                          Expanded(
-                            child: GestureDetector(
-                              child: Image.asset(
-                                'assets/images/artist_2.webp',
-                              ),
-                              onTap: () => print('artist 2'),
-                            ),
-                          ),
-                          Expanded(
-                            child: GestureDetector(
-                              child: Image.asset(
-                                'assets/images/artist_3.webp',
-                              ),
-                              onTap: () => print('artist 3'),
-                            ),
-                          ),
-                          Expanded(
-                            child: GestureDetector(
-                              child: Image.asset(
-                                'assets/images/artist_4.webp',
-                              ),
-                              onTap: () => print('artist 4'),
-                            ),
-                          ),
-                          Expanded(
-                            child: GestureDetector(
-                              child: Image.asset(
-                                'assets/images/artist_5.webp',
-                              ),
-                              onTap: () => print('artist 5'),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                    MainArtist(),
                     Container(
                       margin: EdgeInsets.all(30.0),
                       child: Stack(
@@ -352,241 +227,7 @@ class _MainPageState extends State<MainPage> {
                         ],
                       ),
                     ),
-                    Container(
-                      margin: EdgeInsets.all(30.0),
-                      child: Column(
-                        children: <Widget>[
-                          Row(
-                            children: <Widget>[
-                              Container(
-                                width: 55.0,
-                                height: 55.0,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.rectangle,
-                                  border: Border.all(
-                                    color: Colors.deepPurple,
-                                    width: 2.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(7.0),
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    'VIP',
-                                    style: TextStyle(
-                                      color: Colors.deepPurple,
-                                      fontSize: 18,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(15.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: <Widget>[
-                                    Row(
-                                      children: <Widget>[
-                                        Text(
-                                          'VIP Ticket',
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                        Text(
-                                          '\t\t\$ 500,000',
-                                          style: TextStyle(
-                                            color: Colors.yellowAccent,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    Text(
-                                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. \nAenean pretium, mi ante elit proin tortor amet, venenatis amet.',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 9,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: <Widget>[
-                              Container(
-                                width: 55.0,
-                                height: 55.0,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.rectangle,
-                                  border: Border.all(
-                                    color: Colors.deepPurple,
-                                    width: 2.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(7.0),
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    'VIP',
-                                    style: TextStyle(
-                                      color: Colors.deepPurple,
-                                      fontSize: 18,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(15.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: <Widget>[
-                                    Row(
-                                      children: <Widget>[
-                                        Text(
-                                          'VIP Ticket',
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                        Text(
-                                          '\t\t\$ 500,000',
-                                          style: TextStyle(
-                                            color: Colors.yellowAccent,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    Text(
-                                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. \nAenean pretium, mi ante elit proin tortor amet, venenatis amet.',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 9,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: <Widget>[
-                              Container(
-                                width: 55.0,
-                                height: 55.0,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.rectangle,
-                                  border: Border.all(
-                                    color: Colors.deepPurple,
-                                    width: 2.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(7.0),
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    'VIP',
-                                    style: TextStyle(
-                                      color: Colors.deepPurple,
-                                      fontSize: 18,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(15.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: <Widget>[
-                                    Row(
-                                      children: <Widget>[
-                                        Text(
-                                          'VIP Ticket',
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                        Text(
-                                          '\t\t\$ 500,000',
-                                          style: TextStyle(
-                                            color: Colors.yellowAccent,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    Text(
-                                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. \nAenean pretium, mi ante elit proin tortor amet, venenatis amet.',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 9,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: <Widget>[
-                              Container(
-                                width: 55.0,
-                                height: 55.0,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.rectangle,
-                                  border: Border.all(
-                                    color: Colors.deepPurple,
-                                    width: 2.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(7.0),
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    'VIP',
-                                    style: TextStyle(
-                                      color: Colors.deepPurple,
-                                      fontSize: 18,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(15.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: <Widget>[
-                                    Row(
-                                      children: <Widget>[
-                                        Text(
-                                          'VIP Ticket',
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                        Text(
-                                          '\t\t\$ 500,000',
-                                          style: TextStyle(
-                                            color: Colors.yellowAccent,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    Text(
-                                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. \nAenean pretium, mi ante elit proin tortor amet, venenatis amet.',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 9,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
+                    MainTicket(),
                     Container(
                       margin: EdgeInsets.all(30.0),
                     ),
