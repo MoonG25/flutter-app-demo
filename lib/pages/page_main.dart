@@ -68,7 +68,7 @@ class _MainPageState extends State<MainPage> {
                   IconButton(
                     icon: Icon(Icons.menu),
                     tooltip: 'menu',
-                    onPressed: () => print('menu open'),
+                    onPressed: () => Scaffold.of(context).openEndDrawer(),
                   ),
                 ],
                 pinned: true,
@@ -202,6 +202,38 @@ class _MainPageState extends State<MainPage> {
                       ),
                     ),
                     MainTicket(),
+                    Center(
+                      child: Text(
+                        '* 입장료는 요일, 이벤트에 따라 달라질 수 있으며\n클럽 이미지에 맞지 않는 드레스코드는 입장이 제한될 수 있습니다.',
+                        style: TextStyle(
+                          color: Colors.red,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(top: 15.0),
+                      child: Center(
+                        child: Text(
+                          'Club Octagon, B1/B2 NewHilltopHotel, 645, Nonhyeon-ro, Gangnam-gu, Seoul, Korea',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 9,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(top: 15.0),
+                      child: Center(
+                        child: Text(
+                          '© CLUB B.ONE ALL RIGHTS RESERVED.',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 9,
+                          ),
+                        ),
+                      ),
+                    ),
                     Container(
                       margin: EdgeInsets.all(30.0),
                     ),
@@ -262,7 +294,54 @@ class _MainPageState extends State<MainPage> {
             ],
           ),
         ),
-      )
+      ),
+      endDrawer: Drawer(
+        child: Container(
+          color: Colors.black,
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: <Widget>[
+              DrawerHeader(
+                child: Column(
+                  children: <Widget>[
+                    Center(
+                      child: NeonText('B.ONE', fontSize: 24,),
+                    ),
+                    Container(
+                      margin: EdgeInsets.all(15.0),
+                    ),
+                    Container(
+                      width: 75.0,
+                      height: 75.0,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.deepPurple,
+                        gradient: LinearGradient(
+                          colors: [Colors.deepPurple, Colors.red],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        )
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              ListTile(
+                title: NeonText('Signin', fontSize: 18),
+              ),
+              ListTile(
+                title: NeonText('Signup', fontSize: 18),
+              ),
+              ListTile(
+                title: NeonText('Menu A', fontSize: 18),
+              ),
+              ListTile(
+                title: NeonText('Menu B', fontSize: 18),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
