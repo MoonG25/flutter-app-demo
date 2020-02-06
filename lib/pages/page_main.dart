@@ -122,16 +122,10 @@ class _MainPageState extends State<MainPage> {
                         children: <Widget>[
                           Align(
                             alignment: Alignment(0.25, -1),
-                            child: Container(
-                              height: 75.0,
-                              width: 75.0,
-                              decoration: BoxDecoration(
-                                gradient: new LinearGradient(
-                                  colors: [Colors.orange, Colors.purpleAccent],
-                                  begin: Alignment.centerRight,
-                                  end: new Alignment(-1.0, -1.0)
-                                ),
-                              ),
+                            child: GradientFlowBox(
+                              [Colors.orange, Colors.purpleAccent],
+                              Alignment.centerRight,
+                              Alignment(-1.0, -1.0)
                             ),
                           ),
                           Padding(
@@ -159,24 +153,10 @@ class _MainPageState extends State<MainPage> {
                       margin: EdgeInsets.all(30.0),
                       child: Stack(
                         children: <Widget>[
-//                          GradientFlowBox(
-//                            [Colors.deepPurpleAccent, Colors.cyan],
-//                            Alignment.topLeft,
-//                            Alignment.bottomRight,
-//                            Alignment(-1.0, -1.0),
-//                            Alignment(1.0, 1.0),
-//                          ),
-                          AnimatedContainer(
-                            duration: Duration(seconds: 3),
-                            height: 75.0,
-                            width: 75.0,
-                            decoration: BoxDecoration(
-                              gradient: new LinearGradient(
-                                colors: _colors,
-                                begin: _begin,
-                                end: _end
-                              ),
-                            ),
+                          GradientFlowBox(
+                            [Colors.deepPurple, Colors.cyan],
+                            Alignment.centerRight,
+                            Alignment(-1.0, -1.0),
                           ),
                           Padding(
                             padding: EdgeInsets.only(left: 15.0, top: 15.0),
@@ -200,16 +180,10 @@ class _MainPageState extends State<MainPage> {
                         children: <Widget>[
                           Align(
                             alignment: Alignment(0, 0),
-                            child: Container(
-                              height: 75.0,
-                              width: 75.0,
-                              decoration: BoxDecoration(
-                                gradient: new LinearGradient(
-                                    colors: [Colors.greenAccent, Colors.purpleAccent],
-                                    begin: Alignment.centerRight,
-                                    end: new Alignment(-1.0, -1.0)
-                                ),
-                              ),
+                            child: GradientFlowBox(
+                              [Colors.greenAccent, Colors.purpleAccent],
+                              Alignment.centerRight,
+                              Alignment(-1.0, -1.0),
                             ),
                           ),
                           Padding(

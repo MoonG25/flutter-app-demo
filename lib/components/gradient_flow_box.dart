@@ -1,64 +1,35 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 
 class GradientFlowBox extends StatefulWidget {
 
-  var _colors;
-  var _firstBegin;
-  var _lastBegin;
-  var _firstEnd;
-  var _lastEnd;
+  List<Color> _colors;
+  Alignment _begin;
+  Alignment _end;
 
-  GradientFlowBox(this._colors, this._firstBegin,
-      this._lastBegin, this._firstEnd, this._lastEnd);
+  GradientFlowBox(this._colors, this._begin, this._end);
 
   @override
-  _GradientFlowBoxState createState() => _GradientFlowBoxState(
-    _colors, _firstBegin, _lastBegin, _firstEnd, _lastEnd
-  );
+  _GradientFlowBoxState createState() => _GradientFlowBoxState(_colors, _begin, _end);
 }
 
 class _GradientFlowBoxState extends State<GradientFlowBox> {
 
-  var colors;
-  var firstBegin;
-  var lastBegin;
-  var firstEnd;
-  var lastEnd;
-
-  var begin;
-  var end;
-  bool isTrue;
+  List<Color> colors;
+  Alignment begin;
+  Alignment end;
 
   Timer timer;
 
-  _GradientFlowBoxState(this.colors, this.firstBegin,
-      this.lastBegin, this.firstEnd, this.lastEnd) {
-    begin = firstBegin;
-    end = firstEnd;
-    isTrue = true;
+  _GradientFlowBoxState(this.colors, this.begin, this.end) {
 
     timer = Timer.periodic(new Duration(seconds: 3), (timer) {
-      if (isTrue) {
-        setState(() {
-          colors = [colors[1], colors[0]];
-          begin = lastBegin;
-          end = lastEnd;
-          isTrue = false;
-        });
-        print('1');
-        print(colors.toString());
-      } else {
-        setState(() {
-          colors = [colors[1], colors[0]];
-          begin = firstBegin;
-          end = firstEnd;
-          isTrue = true;
-        });
-        print('2');
-        print(colors.toString());
-      }
+      setState(() {
+        Alignment temp = begin;
+        begin = end;
+        end = temp;
+        colors = colors.reversed.toList();
+      });
     });
   }
 
@@ -76,7 +47,7 @@ class _GradientFlowBoxState extends State<GradientFlowBox> {
       width: 75.0,
       decoration: BoxDecoration(
         gradient: new LinearGradient(
-          colors: colors,
+          colors: new List<Color>.from(colors),
           begin: begin,
           end: end
         ),
