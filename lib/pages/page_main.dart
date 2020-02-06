@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:bone_app/components/gradient_flow_box.dart';
 import 'package:bone_app/components/neon_text.dart';
 import 'package:bone_app/models/event_poster.dart';
 import 'package:bone_app/ui/sliver_appbar_delegate.dart';
@@ -51,7 +52,7 @@ class _MainPageState extends State<MainPage> {
     return Scaffold(
       backgroundColor: Colors.black,
       body: DefaultTabController(
-        length: 2,
+        length: 4,
         child: NestedScrollView(
           headerSliverBuilder: (context, innerBoxIsScrolled) {
             return <Widget>[
@@ -92,6 +93,8 @@ class _MainPageState extends State<MainPage> {
                     tabs: [
                       Tab(text: "BONE"),
                       Tab(text: "EVENT"),
+                      Tab(text: "ORDERS"),
+                      Tab(text: "RESERVATION"),
                     ],
                   ),
                 ),
@@ -144,13 +147,13 @@ class _MainPageState extends State<MainPage> {
                       child: Stack(
                         children: <Widget>[
                           Align(
-                            alignment: Alignment(0.0, 0),
+                            alignment: Alignment(0.25, -1),
                             child: Container(
                               height: 75.0,
                               width: 75.0,
                               decoration: BoxDecoration(
                                 gradient: new LinearGradient(
-                                  colors: [Colors.orange, Colors.red],
+                                  colors: [Colors.orange, Colors.purpleAccent],
                                   begin: Alignment.centerRight,
                                   end: new Alignment(-1.0, -1.0)
                                 ),
@@ -160,9 +163,9 @@ class _MainPageState extends State<MainPage> {
                           Padding(
                             padding: EdgeInsets.only(left: 55.0, top: 15.0),
                             child: Text(
-                              'Info',
+                              'Open/Close',
                               style: TextStyle(
-                                fontSize: 72,
+                                fontSize: 48,
                                 fontFamily: 'BebasNeue',
                                 fontWeight: FontWeight.w700,
                                 color: Colors.white,
@@ -235,6 +238,13 @@ class _MainPageState extends State<MainPage> {
                       margin: EdgeInsets.all(30.0),
                       child: Stack(
                         children: <Widget>[
+//                          GradientFlowBox(
+//                            [Colors.deepPurpleAccent, Colors.cyan],
+//                            Alignment.topLeft,
+//                            Alignment.bottomRight,
+//                            Alignment(-1.0, -1.0),
+//                            Alignment(1.0, 1.0),
+//                          ),
                           AnimatedContainer(
                             duration: Duration(seconds: 3),
                             height: 75.0,
@@ -250,7 +260,7 @@ class _MainPageState extends State<MainPage> {
                           Padding(
                             padding: EdgeInsets.only(left: 15.0, top: 15.0),
                             child: Text(
-                              'Crew',
+                              'Artist',
                               style: TextStyle(
                                 fontSize: 72,
                                 fontFamily: 'BebasNeue',
@@ -262,53 +272,324 @@ class _MainPageState extends State<MainPage> {
                         ],
                       ),
                     ),
-                    Row(
-                      children: <Widget>[
-                        Expanded(
-                          child: GestureDetector(
-                            child: Image.asset(
-                              'assets/images/artist_1.webp',
+                    Container(
+                      margin: EdgeInsets.all(30.0),
+                      child: Row(
+                        children: <Widget>[
+                          Expanded(
+                            child: GestureDetector(
+                              child: Image.asset(
+                                'assets/images/artist_1.webp',
+                              ),
+                              onTap: () => print('artist 1'),
                             ),
-                            onTap: () => print('artist 1'),
                           ),
-                        ),
-                        Expanded(
-                          child: GestureDetector(
-                            child: Image.asset(
-                              'assets/images/artist_2.webp',
+                          Expanded(
+                            child: GestureDetector(
+                              child: Image.asset(
+                                'assets/images/artist_2.webp',
+                              ),
+                              onTap: () => print('artist 2'),
                             ),
-                            onTap: () => print('artist 2'),
                           ),
-                        ),
-                        Expanded(
-                          child: GestureDetector(
-                            child: Image.asset(
-                              'assets/images/artist_3.webp',
+                          Expanded(
+                            child: GestureDetector(
+                              child: Image.asset(
+                                'assets/images/artist_3.webp',
+                              ),
+                              onTap: () => print('artist 3'),
                             ),
-                            onTap: () => print('artist 3'),
                           ),
-                        ),
-                        Expanded(
-                          child: GestureDetector(
-                            child: Image.asset(
-                              'assets/images/artist_4.webp',
+                          Expanded(
+                            child: GestureDetector(
+                              child: Image.asset(
+                                'assets/images/artist_4.webp',
+                              ),
+                              onTap: () => print('artist 4'),
                             ),
-                            onTap: () => print('artist 4'),
                           ),
-                        ),
-                        Expanded(
-                          child: GestureDetector(
-                            child: Image.asset(
-                              'assets/images/artist_5.webp',
+                          Expanded(
+                            child: GestureDetector(
+                              child: Image.asset(
+                                'assets/images/artist_5.webp',
+                              ),
+                              onTap: () => print('artist 5'),
                             ),
-                            onTap: () => print('artist 5'),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                     Container(
                       margin: EdgeInsets.all(30.0),
-                    )
+                      child: Stack(
+                        children: <Widget>[
+                          Align(
+                            alignment: Alignment(0, 0),
+                            child: Container(
+                              height: 75.0,
+                              width: 75.0,
+                              decoration: BoxDecoration(
+                                gradient: new LinearGradient(
+                                    colors: [Colors.greenAccent, Colors.purpleAccent],
+                                    begin: Alignment.centerRight,
+                                    end: new Alignment(-1.0, -1.0)
+                                ),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(left: 55.0, top: 15.0),
+                            child: Text(
+                              'Ticket',
+                              style: TextStyle(
+                                fontSize: 72,
+                                fontFamily: 'BebasNeue',
+                                fontWeight: FontWeight.w700,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.all(30.0),
+                      child: Column(
+                        children: <Widget>[
+                          Row(
+                            children: <Widget>[
+                              Container(
+                                width: 55.0,
+                                height: 55.0,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.rectangle,
+                                  border: Border.all(
+                                    color: Colors.deepPurple,
+                                    width: 2.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(7.0),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    'VIP',
+                                    style: TextStyle(
+                                      color: Colors.deepPurple,
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(15.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Row(
+                                      children: <Widget>[
+                                        Text(
+                                          'VIP Ticket',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                        Text(
+                                          '\t\t\$ 500,000',
+                                          style: TextStyle(
+                                            color: Colors.yellowAccent,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Text(
+                                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. \nAenean pretium, mi ante elit proin tortor amet, venenatis amet.',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 9,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: <Widget>[
+                              Container(
+                                width: 55.0,
+                                height: 55.0,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.rectangle,
+                                  border: Border.all(
+                                    color: Colors.deepPurple,
+                                    width: 2.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(7.0),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    'VIP',
+                                    style: TextStyle(
+                                      color: Colors.deepPurple,
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(15.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Row(
+                                      children: <Widget>[
+                                        Text(
+                                          'VIP Ticket',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                        Text(
+                                          '\t\t\$ 500,000',
+                                          style: TextStyle(
+                                            color: Colors.yellowAccent,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Text(
+                                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. \nAenean pretium, mi ante elit proin tortor amet, venenatis amet.',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 9,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: <Widget>[
+                              Container(
+                                width: 55.0,
+                                height: 55.0,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.rectangle,
+                                  border: Border.all(
+                                    color: Colors.deepPurple,
+                                    width: 2.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(7.0),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    'VIP',
+                                    style: TextStyle(
+                                      color: Colors.deepPurple,
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(15.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Row(
+                                      children: <Widget>[
+                                        Text(
+                                          'VIP Ticket',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                        Text(
+                                          '\t\t\$ 500,000',
+                                          style: TextStyle(
+                                            color: Colors.yellowAccent,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Text(
+                                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. \nAenean pretium, mi ante elit proin tortor amet, venenatis amet.',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 9,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: <Widget>[
+                              Container(
+                                width: 55.0,
+                                height: 55.0,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.rectangle,
+                                  border: Border.all(
+                                    color: Colors.deepPurple,
+                                    width: 2.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(7.0),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    'VIP',
+                                    style: TextStyle(
+                                      color: Colors.deepPurple,
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(15.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Row(
+                                      children: <Widget>[
+                                        Text(
+                                          'VIP Ticket',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                        Text(
+                                          '\t\t\$ 500,000',
+                                          style: TextStyle(
+                                            color: Colors.yellowAccent,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Text(
+                                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. \nAenean pretium, mi ante elit proin tortor amet, venenatis amet.',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 9,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.all(30.0),
+                    ),
                   ],
                 ),
               ),
@@ -328,7 +609,41 @@ class _MainPageState extends State<MainPage> {
                     ),
                   )).toList(),
                 ),
-              )
+              ),
+              SingleChildScrollView(
+                child: Column(
+                  children: posterList.map((eventPoster) => Padding(
+                    padding: const EdgeInsets.all(30.0),
+                    child: Column(
+                      children: <Widget>[
+                        Text(eventPoster.title, style: TextStyle(color: Colors.white),),
+                        Text(eventPoster.date, style: TextStyle(color: Colors.white),),
+                        Image.asset(
+                          eventPoster.image,
+                          width: screenWidth,
+                        ),
+                      ],
+                    ),
+                  )).toList(),
+                ),
+              ),
+              SingleChildScrollView(
+                child: Column(
+                  children: posterList.map((eventPoster) => Padding(
+                    padding: const EdgeInsets.all(30.0),
+                    child: Column(
+                      children: <Widget>[
+                        Text(eventPoster.title, style: TextStyle(color: Colors.white),),
+                        Text(eventPoster.date, style: TextStyle(color: Colors.white),),
+                        Image.asset(
+                          eventPoster.image,
+                          width: screenWidth,
+                        ),
+                      ],
+                    ),
+                  )).toList(),
+                ),
+              ),
             ],
           ),
         ),

@@ -8,7 +8,8 @@ class BoneSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
 
   @override
   Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return new Container(
+    return Container(
+      alignment: Alignment.center,
       color: Colors.black,
       child: _tabBar,
     );

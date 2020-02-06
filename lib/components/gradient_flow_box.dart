@@ -27,7 +27,6 @@ class _GradientFlowBoxState extends State<GradientFlowBox> {
   var firstEnd;
   var lastEnd;
 
-  List<Color> realColor;
   var begin;
   var end;
   bool isTrue;
@@ -48,6 +47,8 @@ class _GradientFlowBoxState extends State<GradientFlowBox> {
           end = lastEnd;
           isTrue = false;
         });
+        print('1');
+        print(colors.toString());
       } else {
         setState(() {
           colors = [colors[1], colors[0]];
@@ -55,6 +56,8 @@ class _GradientFlowBoxState extends State<GradientFlowBox> {
           end = firstEnd;
           isTrue = true;
         });
+        print('2');
+        print(colors.toString());
       }
     });
   }
