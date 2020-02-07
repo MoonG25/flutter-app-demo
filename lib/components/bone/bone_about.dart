@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class MainAbout extends StatelessWidget {
+class BoneAbout extends StatelessWidget {
 
   String _title;
   String _subtitle;
   String _image;
 
-  MainAbout(this._title, this._subtitle, this._image);
+  BoneAbout(this._title, this._subtitle, this._image);
 
   @override
   Widget build(BuildContext context) {

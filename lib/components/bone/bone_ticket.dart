@@ -1,11 +1,11 @@
 import 'package:bone_app/models/ticket.dart';
 import 'package:flutter/material.dart';
 
-class MainTicket extends StatelessWidget {
+class BoneTicket extends StatelessWidget {
 
   List<Ticket> ticketList = [];
 
-  MainTicket() {
+  BoneTicket() {
     ticketList.add(new Ticket('VVIP Ticket', 'VVIP', '\$ 500,000', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. \nAenean pretium, mi ante elit proin tortor amet, venenatis amet.'));
     ticketList.add(new Ticket('VIP Ticket', 'VIP', '\$ 250,000', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. \nAenean pretium, mi ante elit proin tortor amet, venenatis amet.'));
     ticketList.add(new Ticket('A Class Ticket', 'A', '\$ 150,000', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. \nAenean pretium, mi ante elit proin tortor amet, venenatis amet.'));

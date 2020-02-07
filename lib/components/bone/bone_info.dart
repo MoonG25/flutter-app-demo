@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class MainInfo extends StatelessWidget {
+class BoneInfo extends StatelessWidget {
 
   List<String> _dates;
   String _open;
   String _close;
   String _image;
 
-  MainInfo(this._dates, this._open, this._close, this._image);
+  BoneInfo(this._dates, this._open, this._close, this._image);
 
   @override
   Widget build(BuildContext context) {

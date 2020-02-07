@@ -62,6 +62,10 @@ flutter:
     - assets/images/artist_4.webp
     - assets/images/artist_5.webp
     - assets/images/time_1.jpg
+    - assets/images/order_back1.jpg
+    - assets/images/order_back2.jpg
+    - assets/images/order_back3.jpg
+    - assets/images/order_back4.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

@@ -2,11 +2,11 @@ import 'package:bone_app/models/artist.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class MainArtist extends StatelessWidget {
+class BoneArtist extends StatelessWidget {
 
   List<Artist> _artistList = [];
 
-  MainArtist() {
+  BoneArtist() {
     _artistList.add(new Artist('djak_kim', 'https://www.instagram.com/djak_kim/', 'assets/images/artist_1.webp'));
     _artistList.add(new Artist('mewloud.rar', 'https://www.instagram.com/mewloud.rar/', 'assets/images/artist_2.webp'));
     _artistList.add(new Artist('krein_hak', 'https://www.instagram.com/krein_hak/', 'assets/images/artist_3.webp'));

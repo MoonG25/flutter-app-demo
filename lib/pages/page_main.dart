@@ -1,15 +1,12 @@
 import 'dart:async';
 
-import 'package:bone_app/components/gradient_flow_box.dart';
-import 'package:bone_app/components/main/main_about.dart';
-import 'package:bone_app/components/main/main_artist.dart';
-import 'package:bone_app/components/main/main_info.dart';
-import 'package:bone_app/components/main/main_ticket.dart';
+import 'package:bone_app/components/bone/bone_view.dart';
+import 'package:bone_app/components/event/event_view.dart';
 import 'package:bone_app/components/neon_text.dart';
-import 'package:bone_app/models/event_poster.dart';
+import 'package:bone_app/components/order/order_view.dart';
+import 'package:bone_app/components/reservation/reservation_view.dart';
 import 'package:bone_app/ui/sliver_appbar_delegate.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -17,14 +14,6 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-
-  List<EventPoster> posterList = [
-    new EventPoster('EVENT 1', '2020-01-01', 'assets/images/ad_1.jpg'),
-    new EventPoster('EVENT 2', '2020-01-02', 'assets/images/ad_2.jpg'),
-    new EventPoster('EVENT 3', '2020-01-03', 'assets/images/ad_3.jpg'),
-    new EventPoster('EVENT 4', '2020-01-04', 'assets/images/ad_4.jpg'),
-    new EventPoster('EVENT 5', '2020-01-05', 'assets/images/ad_5.jpg'),
-  ];
 
   var _colors = [Colors.deepPurpleAccent, Colors.cyan];
   var _begin = Alignment.centerRight;
@@ -108,189 +97,10 @@ class _MainPageState extends State<MainPage> {
           },
           body: TabBarView(
             children: <Widget>[
-              SingleChildScrollView(
-                child: Column(
-                  children: <Widget>[
-                    MainAbout(
-                      'CLUB B.ONE',
-                      'First ever Chinese VIP Night Club On Manila!\nCome and party with us. See you there!',
-                      'assets/images/club_1.jpg',
-                    ),
-                    Container(
-                      margin: EdgeInsets.all(30.0),
-                      child: Stack(
-                        children: <Widget>[
-                          Align(
-                            alignment: Alignment(0.25, -1),
-                            child: GradientFlowBox(
-                              [Colors.orange, Colors.purpleAccent],
-                              Alignment.centerRight,
-                              Alignment(-1.0, -1.0)
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(left: 55.0, top: 15.0),
-                            child: Text(
-                              'Open/Close',
-                              style: TextStyle(
-                                fontSize: 48,
-                                fontFamily: 'BebasNeue',
-                                fontWeight: FontWeight.w700,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    MainInfo(
-                      ['Thurssday', 'Friday', 'Saturday', 'Sunday'],
-                      '23:00',
-                      '07:00',
-                      'assets/images/club_3.jpg',
-                    ),
-                    Container(
-                      margin: EdgeInsets.all(30.0),
-                      child: Stack(
-                        children: <Widget>[
-                          GradientFlowBox(
-                            [Colors.deepPurple, Colors.cyan],
-                            Alignment.centerRight,
-                            Alignment(-1.0, -1.0),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(left: 15.0, top: 15.0),
-                            child: Text(
-                              'Artist',
-                              style: TextStyle(
-                                fontSize: 72,
-                                fontFamily: 'BebasNeue',
-                                fontWeight: FontWeight.w700,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    MainArtist(),
-                    Container(
-                      margin: EdgeInsets.all(30.0),
-                      child: Stack(
-                        children: <Widget>[
-                          Align(
-                            alignment: Alignment(0, 0),
-                            child: GradientFlowBox(
-                              [Colors.greenAccent, Colors.purpleAccent],
-                              Alignment.centerRight,
-                              Alignment(-1.0, -1.0),
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(left: 55.0, top: 15.0),
-                            child: Text(
-                              'Ticket',
-                              style: TextStyle(
-                                fontSize: 72,
-                                fontFamily: 'BebasNeue',
-                                fontWeight: FontWeight.w700,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    MainTicket(),
-                    Center(
-                      child: Text(
-                        '* 입장료는 요일, 이벤트에 따라 달라질 수 있으며\n클럽 이미지에 맞지 않는 드레스코드는 입장이 제한될 수 있습니다.',
-                        style: TextStyle(
-                          color: Colors.red,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(top: 15.0),
-                      child: Center(
-                        child: Text(
-                          'Club Octagon, B1/B2 NewHilltopHotel, 645, Nonhyeon-ro, Gangnam-gu, Seoul, Korea',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 9,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(top: 15.0),
-                      child: Center(
-                        child: Text(
-                          '© CLUB B.ONE ALL RIGHTS RESERVED.',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 9,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.all(30.0),
-                    ),
-                  ],
-                ),
-              ),
-              SingleChildScrollView(
-                child: Column(
-                  children: posterList.map((eventPoster) => Padding(
-                    padding: const EdgeInsets.all(30.0),
-                    child: Column(
-                      children: <Widget>[
-                        Text(eventPoster.title, style: TextStyle(color: Colors.white),),
-                        Text(eventPoster.date, style: TextStyle(color: Colors.white),),
-                        Image.asset(
-                          eventPoster.image,
-                          width: screenWidth,
-                        ),
-                      ],
-                    ),
-                  )).toList(),
-                ),
-              ),
-              SingleChildScrollView(
-                child: Column(
-                  children: posterList.map((eventPoster) => Padding(
-                    padding: const EdgeInsets.all(30.0),
-                    child: Column(
-                      children: <Widget>[
-                        Text(eventPoster.title, style: TextStyle(color: Colors.white),),
-                        Text(eventPoster.date, style: TextStyle(color: Colors.white),),
-                        Image.asset(
-                          eventPoster.image,
-                          width: screenWidth,
-                        ),
-                      ],
-                    ),
-                  )).toList(),
-                ),
-              ),
-              SingleChildScrollView(
-                child: Column(
-                  children: posterList.map((eventPoster) => Padding(
-                    padding: const EdgeInsets.all(30.0),
-                    child: Column(
-                      children: <Widget>[
-                        Text(eventPoster.title, style: TextStyle(color: Colors.white),),
-                        Text(eventPoster.date, style: TextStyle(color: Colors.white),),
-                        Image.asset(
-                          eventPoster.image,
-                          width: screenWidth,
-                        ),
-                      ],
-                    ),
-                  )).toList(),
-                ),
-              ),
+              BoneView(),
+              EventView(),
+              OrderView(),
+              ReservationView(),
             ],
           ),
         ),
@@ -342,6 +152,18 @@ class _MainPageState extends State<MainPage> {
           ),
         ),
       ),
+      floatingActionButton:  getFloatingActionButton(),
     );
   }
+}
+
+FloatingActionButton getFloatingActionButton() {
+  bool isOrder = false;
+  if (!isOrder) return FloatingActionButton(
+    onPressed: () => print('pressed'),
+    child: Icon(Icons.shopping_basket, color: Colors.black),
+    backgroundColor: Colors.white,
+  );
+
+  return null;
 }
