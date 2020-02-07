@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:bone_app/components/bone/bone_view.dart';
 import 'package:bone_app/components/event/event_view.dart';
 import 'package:bone_app/components/neon_text.dart';
@@ -13,31 +11,51 @@ class MainPage extends StatefulWidget {
   _MainPageState createState() => _MainPageState();
 }
 
-class _MainPageState extends State<MainPage> {
+class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin {
 
-  var _colors = [Colors.deepPurpleAccent, Colors.cyan];
-  var _begin = Alignment.centerRight;
-  var _end = new Alignment(-1.0, -1.0);
-  bool _isTrue = true;
+  final List<Tab> boneTabs = <Tab>[
+    Tab(text: "BONE"),
+    Tab(text: "EVENT"),
+    Tab(text: "ORDERS"),
+    Tab(text: "RESERVATION"),
+  ];
 
-  _MainPageState() {
-    Timer.periodic(new Duration(seconds: 3), (timer) {
-      if (_isTrue) {
-        setState(() {
-          _colors = [Colors.cyan, Colors.deepPurpleAccent];
-          _begin = Alignment.centerLeft;
-          _end = new Alignment(1.0, 1.0);
-          _isTrue = false;
-        });
-      } else {
-        setState(() {
-          _colors = [Colors.deepPurpleAccent, Colors.cyan];
-          _begin = Alignment.centerRight;
-          _end = new Alignment(-1.0, -1.0);
-          _isTrue = true;
-        });
-      }
-    });
+  TabController _tabController;
+  bool _isOrder = false;
+
+  _handleTabChange() {
+    if (_tabController.index == 2) {
+      setState(() {
+        _isOrder = true;
+      });
+    } else {
+      setState(() {
+        _isOrder = false;
+      });
+    }
+  }
+
+  FloatingActionButton getFloatingActionButton() {
+    if (_isOrder) return FloatingActionButton(
+      onPressed: () => print('pressed'),
+      child: Icon(Icons.shopping_basket, color: Colors.black),
+      backgroundColor: Colors.white,
+    );
+
+    return null;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(vsync: this, length: boneTabs.length);
+    _tabController.addListener(_handleTabChange);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _tabController.dispose();
   }
 
   @override
@@ -45,64 +63,58 @@ class _MainPageState extends State<MainPage> {
     double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Colors.black,
-      body: DefaultTabController(
-        length: 4,
-        child: NestedScrollView(
-          headerSliverBuilder: (context, innerBoxIsScrolled) {
-            return <Widget>[
-              SliverAppBar(
-                backgroundColor: Colors.black,
-                expandedHeight: 360.0,
-                actions: <Widget>[
-                  IconButton(
-                    icon: Icon(Icons.menu),
-                    tooltip: 'menu',
-                    onPressed: () => Scaffold.of(context).openEndDrawer(),
-                  ),
-                ],
-                pinned: true,
-                floating: true,
-                flexibleSpace: FlexibleSpaceBar(
-                  centerTitle: true,
-                  title: NeonText('B.ONE', fontSize: 24,),
-                  background: Image.asset(
-                    'assets/images/sliver_background.jpg',
-                  ),
+      body:  NestedScrollView(
+        headerSliverBuilder: (context, innerBoxIsScrolled) {
+          return <Widget>[
+            SliverAppBar(
+              backgroundColor: Colors.black,
+              expandedHeight: 360.0,
+              actions: <Widget>[
+                IconButton(
+                  icon: Icon(Icons.menu),
+                  tooltip: 'menu',
+                  onPressed: () => Scaffold.of(context).openEndDrawer(),
+                ),
+              ],
+              pinned: true,
+              floating: true,
+              flexibleSpace: FlexibleSpaceBar(
+                centerTitle: true,
+                title: NeonText('B.ONE', fontSize: 24,),
+                background: Image.asset(
+                  'assets/images/sliver_background.jpg',
                 ),
               ),
-              SliverPersistentHeader(
-                pinned: true,
-                delegate: BoneSliverAppBarDelegate(
-                  TabBar(
-                    isScrollable: true,
-                    indicatorColor: Color(0xfffbeca1),
-                    indicatorWeight: 3.0,
-                    labelStyle: TextStyle(
-                      fontWeight: FontWeight.w700,
-                    ),
-                    unselectedLabelColor: Colors.white,
-                    unselectedLabelStyle: TextStyle(
-                      fontWeight: FontWeight.w300,
-                    ),
-                    tabs: [
-                      Tab(text: "BONE"),
-                      Tab(text: "EVENT"),
-                      Tab(text: "ORDERS"),
-                      Tab(text: "RESERVATION"),
-                    ],
+            ),
+            SliverPersistentHeader(
+              pinned: true,
+              delegate: BoneSliverAppBarDelegate(
+                TabBar(
+                  controller: _tabController,
+                  isScrollable: true,
+                  indicatorColor: Color(0xfffbeca1),
+                  indicatorWeight: 3.0,
+                  labelStyle: TextStyle(
+                    fontWeight: FontWeight.w700,
                   ),
+                  unselectedLabelColor: Colors.white,
+                  unselectedLabelStyle: TextStyle(
+                    fontWeight: FontWeight.w300,
+                  ),
+                  tabs: boneTabs,
                 ),
               ),
-            ];
-          },
-          body: TabBarView(
-            children: <Widget>[
-              BoneView(),
-              EventView(),
-              OrderView(),
-              ReservationView(),
-            ],
-          ),
+            ),
+          ];
+        },
+        body: TabBarView(
+          controller: _tabController,
+          children: <Widget>[
+            BoneView(),
+            EventView(),
+            OrderView(),
+            ReservationView(),
+          ],
         ),
       ),
       endDrawer: Drawer(
@@ -155,15 +167,4 @@ class _MainPageState extends State<MainPage> {
       floatingActionButton:  getFloatingActionButton(),
     );
   }
-}
-
-FloatingActionButton getFloatingActionButton() {
-  bool isOrder = false;
-  if (!isOrder) return FloatingActionButton(
-    onPressed: () => print('pressed'),
-    child: Icon(Icons.shopping_basket, color: Colors.black),
-    backgroundColor: Colors.white,
-  );
-
-  return null;
 }
