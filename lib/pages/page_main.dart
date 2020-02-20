@@ -1,4 +1,5 @@
 import 'package:bone_app/components/bone/bone_view.dart';
+import 'package:bone_app/components/bone_drawer.dart';
 import 'package:bone_app/components/event/event_view.dart';
 import 'package:bone_app/components/neon_text.dart';
 import 'package:bone_app/components/order/order_view.dart';
@@ -13,6 +14,8 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin {
 
+  bool _isLoggedIn = false;
+  int _selectedIndex = 0;
   final List<Tab> boneTabs = <Tab>[
     Tab(text: "BONE"),
     Tab(text: "EVENT"),
@@ -20,23 +23,16 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
     Tab(text: "RESERVATION"),
   ];
 
-  TabController _tabController;
-  bool _isOrder = false;
-
-  _handleTabChange() {
-    if (_tabController.index == 2) {
-      setState(() {
-        _isOrder = true;
-      });
-    } else {
-      setState(() {
-        _isOrder = false;
-      });
-    }
-  }
+  List<Widget> _widgetOptions = <Widget>[
+    BoneView(),
+    EventView(),
+    OrderView(),
+    ReservationView(),
+    Text('profile'),
+  ];
 
   FloatingActionButton getFloatingActionButton() {
-    if (_isOrder) return FloatingActionButton(
+    return FloatingActionButton(
       onPressed: () => print('pressed'),
       child: Icon(Icons.shopping_basket, color: Colors.black),
       backgroundColor: Colors.white,
@@ -45,22 +41,24 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
     return null;
   }
 
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(vsync: this, length: boneTabs.length);
-    _tabController.addListener(_handleTabChange);
   }
 
   @override
   void dispose() {
     super.dispose();
-    _tabController.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Colors.black,
       body:  NestedScrollView(
@@ -68,7 +66,7 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
           return <Widget>[
             SliverAppBar(
               backgroundColor: Colors.black,
-              expandedHeight: 360.0,
+              expandedHeight: 250.0,
               actions: <Widget>[
                 IconButton(
                   icon: Icon(Icons.menu),
@@ -86,85 +84,42 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
                 ),
               ),
             ),
-            SliverPersistentHeader(
-              pinned: true,
-              delegate: BoneSliverAppBarDelegate(
-                TabBar(
-                  controller: _tabController,
-                  isScrollable: true,
-                  indicatorColor: Color(0xfffbeca1),
-                  indicatorWeight: 3.0,
-                  labelStyle: TextStyle(
-                    fontWeight: FontWeight.w700,
-                  ),
-                  unselectedLabelColor: Colors.white,
-                  unselectedLabelStyle: TextStyle(
-                    fontWeight: FontWeight.w300,
-                  ),
-                  tabs: boneTabs,
-                ),
-              ),
-            ),
           ];
         },
-        body: TabBarView(
-          controller: _tabController,
-          children: <Widget>[
-            BoneView(),
-            EventView(),
-            OrderView(),
-            ReservationView(),
-          ],
-        ),
+        body: _widgetOptions.elementAt(_selectedIndex),
       ),
-      endDrawer: Drawer(
-        child: Container(
-          color: Colors.black,
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: <Widget>[
-              DrawerHeader(
-                child: Column(
-                  children: <Widget>[
-                    Center(
-                      child: NeonText('B.ONE', fontSize: 24,),
-                    ),
-                    Container(
-                      margin: EdgeInsets.all(15.0),
-                    ),
-                    Container(
-                      width: 75.0,
-                      height: 75.0,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.deepPurple,
-                        gradient: LinearGradient(
-                          colors: [Colors.deepPurple, Colors.red],
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                        )
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              ListTile(
-                title: NeonText('Signin', fontSize: 18),
-              ),
-              ListTile(
-                title: NeonText('Signup', fontSize: 18),
-              ),
-              ListTile(
-                title: NeonText('Menu A', fontSize: 18),
-              ),
-              ListTile(
-                title: NeonText('Menu B', fontSize: 18),
-              ),
-            ],
-          ),
-        ),
-      ),
+      endDrawer: BoneDrawer(),
       floatingActionButton:  getFloatingActionButton(),
+      bottomNavigationBar: BottomNavigationBar(
+        selectedItemColor: Colors.purpleAccent,
+        unselectedItemColor: Colors.white,
+        backgroundColor: Colors.black,
+        type: BottomNavigationBarType.fixed,
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            title: Text('Home'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.event),
+            title: Text('Event'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.shop),
+            title: Text('Shop'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.notifications),
+            title: Text('Notice'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            title: Text('Profile'),
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
+      ),
     );
   }
 }
